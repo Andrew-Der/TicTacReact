@@ -53,25 +53,26 @@ export function checkDownwardDiag(marker, board) {
 export function checkForWin (moveCounter, marker, position, board) {
 
 	let didWin = false
-	if (moveCounter >= board.length * 2) {
+	if (moveCounter >= board.length * 2 - 1) {
 		/* check horizontal */
 		didWin = checkHorizontal(marker, position.x, board)
+		console.log("horizontal? " + didWin)
 
 		/* check vertical */
 		if (!didWin) {
 			didWin = checkVertical(marker, position.y, board)
-			//console.log("Vertical? " + didWin)
+			console.log("Vertical? " + didWin)
 		}
 
 		if (!didWin && isPositionOnUpwardDiag(position, board)) {
 			didWin = checkUpwardDiag(marker, board)
-			//console.log("Upward Diag? " + didWin)
+			console.log("Upward Diag? " + didWin)
 
 		}
 
 		if(!didWin && isPositionOnDownwardDiag(position, board)) {
 			didWin = checkDownwardDiag(marker, board)
-			//console.log("DownwardDiag Diag? " + didWin)
+			console.log("DownwardDiag Diag? " + didWin)
 
 		}
 	}
