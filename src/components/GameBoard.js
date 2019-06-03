@@ -1,89 +1,63 @@
-import { useReducer, useEffect }, React from 'react';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { Button } from 'react-bootstrap'
 
 /* Component with game variables & logic*/
-function GameBoard(){
+export function GameBoard(){
 
-	//const [state, dispatch] = useReducer()
-	const numMoves = 0
-	const boardLength = 3
-	const winner = null
-	const board = new Array(boardLength)
+	const [boardLength, setBoardLength] = useState(3)
+	const [board, setBoard] = useState(resetBoard())
+	const [winner, setWinner] = useState(null)
+	const [numMoves, setNumMoves] = useState(0)
+	const [startingPlayer, setStartingPlayer] = useState(1)
 
-
-	function checkHorizontal(marker, xPosition) {
-		let allInARow = true
-		for(let i = 0; i < boardLength && allInARow; i++) {
-			if (board[xPosition][i] !== marker) {
-				allInARow = false
+	function resetBoard() {
+		const newBoard = new Array()
+		for (let i = 0; i < boardLength; i++) {
+			const newRow = new Array()
+			for (let j = 0; j < boardLength; j++) {
+				newRow.push(null)
 			}
+			newBoard.push(newRow)
 		}
-		return allInARow
+		return newBoard
 	}
-	function checkVertical(marker, yPosition) {
-		let allInARow = true
-		for(let i = 0; i < boardLength && allInARow; i++) {
-			if (board[i][yPosition] !== marker) {
-				allInARow = false
-			}
+
+	function getCurrPlayer() {
+		let currPlayer = startingPlayer
+		/* odd turn */
+		if (numMoves % 2 !== 0) {
+			currPlayer = startingPlayer ? 0 : 1
 		}
-		return allInARow
+		return currPlayer
 	}
-	function isPositionOnUpwardDiag(position) {
-		return (position.x + position.y === boardLength - 1)
-	}
-	function isPositionOnDownwardDiag(position) {
-		return (position.x === position.y)
-	}
-	function checkUpwardDiag(marker) {
-		let allInARow = true
-		for (let i = 0; i < boardLength && allInARow; i++) {
-			// const xDiag = boardLength - 1 - i
-			// const yDiag = i
-			if (board[boardLength - 1 -i][i] !== marker) {
-				allInARow = false
-			}
-		}
-		return allInARow
-	}
-	function checkDownwardDiag(marker) {
-		let allInARow = true
-		for (let i = 0; i < boardLength && allInARow; i++) {
-			if (board[i][i] !== marker) {
-				allInARow = false
-			}
-		}
-		return allInARow
-	}
-
-
-	/* return T/F if marker won*/
-	function checkForWin (marker, position) {
-
-		let didWin = false
-		if (moveCounter >= boardLength * 2) {
-			/* check horizontal */
-			didWin = checkHorizontal(marker, position.x)
-
-			/* check vertical */
-			if (!didWin) {
-				didWin = checkVertical(marker, position.y)
-			}
-
-			if (!didWin && isPositionOnUpwardDiag(position)) {
-				didWin = checkUpwardDiag(marker, position)
-			}
-
-			if(!didWin && isPositionOnDownwardDiag(position)) {
-				didWin = checkDownwardDiag(marker, position)
-			}
-		}
-		return didWin
-	}
-
-
+	/* after board length is changed */
+	useEffect(()=> {
+		setNumMoves(0)
+		setBoard(resetBoard())
+	}, [boardLength])
 
 	return (
+		<div>
 		<p>some gameboard</p>
+			<Button onClick={() => setWinner(0)}>Winner</Button>
+			<input type="number" min="3" 
+			placeHolder={boardLength}
+			onBlur={(event) => {
+				setBoardLength(event.target.value)
+			}}></input> 
 
+			<div>
+			{JSON.stringify(board)}
+			</div>
+			<Button onClick={() => {
+				setWinner(null)
+				setNumMoves(0)
+				resetBoard()
+			}}>Reset</Button>
+			{winner !== null &&
+				<p>Congrats Player {winner}, nice win!</p>
+			}
+		</div>
 	)
 }
