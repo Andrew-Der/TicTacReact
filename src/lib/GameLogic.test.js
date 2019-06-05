@@ -1,5 +1,5 @@
 import { checkForWin } from './GameLogic'
-
+/* Always needs to test :) */
 it('check for horizontal win', () => {
 	const board = [
 		[0, 0, 0],

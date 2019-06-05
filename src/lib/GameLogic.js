@@ -7,6 +7,7 @@ function checkHorizontalForWin(marker, xPosition, board) {
 	}
 	return allInARow
 }
+
 function checkVerticalForWin(marker, yPosition, board) {
 	let allInARow = true
 	for(let i = 0; i < board.length && allInARow; i++) {
@@ -16,12 +17,15 @@ function checkVerticalForWin(marker, yPosition, board) {
 	}
 	return allInARow
 }
+
 function isPositionOnUpwardDiag(position, board) {
 	return (position.x + position.y === board.length - 1)
 }
+
 function isPositionOnDownwardDiag(position, board) {
 	return (position.x === position.y)
 }
+
 function checkUpwardDiagForWin(marker, board) {
 	let allInARow = true
 	for (let i = 0; i < board.length && allInARow; i++) {
@@ -31,6 +35,7 @@ function checkUpwardDiagForWin(marker, board) {
 	}
 	return allInARow
 }
+
 function checkDownwardDiagForWin(marker, board) {
 	let allInARow = true
 	for (let i = 0; i < board.length && allInARow; i++) {
