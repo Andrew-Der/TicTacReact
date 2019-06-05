@@ -31,3 +31,40 @@
     transform: rotate(360deg);
   }
 }
+
+.DivCentered {
+  min-width: 60%;
+  max-width: 70%;
+}
+
+.BoxBackground {
+  background-color: grey;
+  min-width: 45px;
+  min-height: 45px;
+  padding-top: 100%;
+  margin: 1px;
+  position: relative;
+}
+
+.BoxForegroundIcon {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 30%;
+}
+
+/* SHOUTOUT
+https://julienmelissas.com/no-gutter-column-trick-for-bootstrap/
+*/
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}

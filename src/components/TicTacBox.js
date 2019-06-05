@@ -1,15 +1,14 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+
 export function Box(props) {
-
 	const {marker, onClick} = props
-//minHeight, minWidth
-//borders
+	/* ShoutOut : Icons from FontAwesome! */
+	const icon = marker ? "fa fa-times fa-2x" : "fa fa-circle-o fa-2x"
 	return (
-
-		<Button style={{minHeight: "10px"}}onClick={onClick}>
-			{marker === 1 && <i className="fa fa-times"></i>}
-			{marker === 0 && <i className="fa fa-circle-o"></i>}
-		</Button>
-		)
+		<div className="BoxBackground" onClick={onClick}>
+		{marker !== null && 
+			<div className="BoxForegroundIcon">
+				<i className={icon}/>
+			</div>}
+		</div>)
 }
