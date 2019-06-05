@@ -80,7 +80,7 @@ export function GameBoard(){
 
 	return (
 		<div className="DivCentered">
-			<label>board length</label>
+			<label>Tic Tac Toe board length</label>
 			<input type="number" min="3" max="10" 
 			placeholder={boardLength}
 			onBlur={(event) => {
